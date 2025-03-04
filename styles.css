@@ -61,7 +61,8 @@ body {
 .notes-section {
     flex: 1;
     padding-left: 0rem;
-    border-left: 1px solid var(--color-gray-200);
+    padding-top: 1rem;
+    border-left: 0px solid var(--color-gray-200);
 }
 
 /* Header Styles */
@@ -112,7 +113,7 @@ body {
 
 .message-workload {
     font-size: 1rem;
-    color: rgba(255, 0, 0, 0.835);
+    color: rgba(251, 255, 0, 0.919);
 }
 
 .stats-grid {
@@ -127,7 +128,8 @@ body {
 
 /* Content Container */
 .content {
-    padding: var(--spacing-lg);
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
     background: white;
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
