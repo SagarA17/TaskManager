@@ -326,7 +326,7 @@ body {
 }
 
 .edit-modal {
-    background: white;
+    background: rgb(34, 33, 33);
     padding: 1rem;
     border-radius: var(--radius);
     width: 90%;
@@ -598,7 +598,7 @@ select.input:focus {
 
     .task-name {
         color: #ffffff;
-        text-align: left;
+        text-align: center;
         margin-bottom: 1rem;
     }
 }
@@ -706,11 +706,11 @@ select.input:focus {
 }
 
 .notes-container {
-    background-color: white;
+    /* background-color: rgb(42, 40, 40); */ /* Comment out to just be transparent */
     border-radius: var(--radius);
-    padding: 1rem;
+    padding: .3rem;
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--color-gray-200);
+    border: .5px solid var(--color-gray-200);
 }
 
 .notes-textarea {

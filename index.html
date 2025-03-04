@@ -172,13 +172,11 @@
                             <div className="header-left">
                                 <h1 className="text-xl font-bold">Sagar's Task Manager</h1>
                             </div>
-                            
                             <div className="header-center workload-message">
                                 <div className="message-main">{analyzeWorkload(tasks).message}</div>
                                 <div className="message-advice">{analyzeWorkload(tasks).advice}</div>
                                 <div className="message-workload">{analyzeWorkload(tasks).workload}</div>
                             </div>
-                            
                             <div className="header-right">
                                 <button onClick={exportToJson} className="btn-secondary">
                                 Export to JSON
@@ -219,184 +217,183 @@
 
                         {/* Task and Notes Content */}
                         <div className="main-content">
-                        <div className="tasks-section">
-                        <div className="content">
-                            {/* Task Grid */}
-                            <div className="task-grid">
-                                {/* Add Task Button */}
-                                <div 
-                                    className="add-task-button"
-                                    onClick={() => {
+                            <div className="tasks-section">
+                                <div className="content">
+                                    {/* Task Grid */}
+                                    <div className="task-grid">
+                                        {/* Add Task Button */}
+                                        <div 
+                                            className="add-task-button"
+                                            onClick={() => {
 
-                                    // Create a blank task object as template
-                                    const blankTask = { 
-                                        id: 'new', 
-                                        name: '', 
-                                        importance: 3, 
-                                        length: 3, 
-                                        difficulty: 3, 
-                                        project: currentFilter === 'all' ? 'other' : currentFilter,
-                                        deadline: ''
-                                    };
-                                    setEditingTask(blankTask);                             
-                                }}
-                                >
-                                    <div className="add-task-icon">📌</div>
-                                    <h4>New Task</h4>
-                                </div>
-                                {
-                                    filteredTasks.map(task => (
-                                    <div
-                                        id={`task-${task.id}`}
-                                        key={task.id}
-                                        className={`task-item slide-in importance-${task.importance}`}
-                                    >
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex-1 min-w-0 text-center">  {/* Add text-center here */}
-                                                <h3 className="task-name text-left">  {/* Add text-left to keep title aligned left */}
-                                                    {task.name}
-                                                </h3>
-                                                <div className="priority-container">
-                                                    <span className="priority-badge">
-                                                        {calculatePriority(task)}
-                                                    </span>
-                                                    <span className="project-badge" style={{marginLeft: '0.5rem',
-                                                    backgroundColor: PROJECTS[task.project || 'other'].color || PROJECTS['other'].color1}}>
-                                                        {PROJECTS[task.project || 'other'].name || PROJECTS['other'].name}                                                    
-                                                    </span>
-                                                </div>
-                                                <div className="task-meta justify-center">  {/* Add justify-center */}
-                                                    <span>Importance: {task.importance}</span>
-                                                    <span>Length: {task.length}</span>
-                                                    <span>Difficulty: {task.difficulty}</span>
-                                                </div>
-                                                <div className="task-meta justify-center">  {/* Add justify-center */}
-                                                    Added {formatDate(task.createdAt)} ({getDaysOld(task.createdAt)} days ago)
-                                                </div>
-                                                {task.deadline && (
-                                                    <div className="task-meta justify-center">
-                                                        Deadline: {new Date(task.deadline).toLocaleDateString()}
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <div className="action-buttons">
-                                                <button
-                                                    onClick={() => completeTask(task)}
-                                                    className="action-btn complete"
-                                                    title="Complete task"
-                                                >
-                                                    <span style={{ marginTop: '-2px' }}>✔</span>
-                                                </button>
-                                                <button
-                                                    onClick={() => startEditing(task)}
-                                                    className="action-btn edit"
-                                                    title="Edit task"
-                                                >
-                                                    <span style={{ marginTop: '-2px' }}>✎</span>
-                                                </button>
-                                                <button
-                                                    onClick={() => removeTask(task.id)}
-                                                    className="action-btn delete"
-                                                    title="Delete task"
-                                                >
-                                                    <span style={{ marginTop: '-2px' }}>✖</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="section-divider"></div>
-
-                            {/* Completed Tasks */}
-                            <div>
-                                <button
-                                    onClick={() => setShowCompleted(!showCompleted)}
-                                    className="btn w-full flex justify-between items-center"
-                                >
-                                    <span>Completed Tasks ({filteredCompletedTasks.length})</span>
-                                    <span>{showCompleted ? ' ▼ ' : ' ▶ '}</span>
-                                </button>
-
-                                <div className={`completed-section ${showCompleted ? 'open' : ''}`}>
-                                    <div className="completed-task-grid">
-                                        {filteredCompletedTasks.map(task => (
-                                        <div
-                                            key={task.id}
-                                            className="task-item completed-task"
+                                            // Create a blank task object as template
+                                            const blankTask = { 
+                                                id: 'new', 
+                                                name: '', 
+                                                importance: 3, 
+                                                length: 3, 
+                                                difficulty: 3, 
+                                                project: currentFilter === 'all' ? 'other' : currentFilter,
+                                                deadline: ''
+                                            };
+                                            setEditingTask(blankTask);                             
+                                        }}
                                         >
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <div className="task-name">{task.name}</div>
-                                                    <div className="task-meta">
-                                                        Started: {formatDate(task.createdAt)}
+                                            <div className="add-task-icon">📌</div>
+                                            <h4>Add New Task</h4>
+                                        </div>
+                                        {
+                                            filteredTasks.map(task => (
+                                            <div
+                                                id={`task-${task.id}`}
+                                                key={task.id}
+                                                className={`task-item slide-in importance-${task.importance}`}
+                                            >
+                                                <div className="flex items-center justify-between">
+                                                    <div className="flex-1 min-w-0 text-center">  {/* Add text-center here */}
+                                                        <h3 className="task-name text-left">  {/* Add text-left to keep title aligned left */}
+                                                            {task.name}
+                                                        </h3>
+                                                        <div className="priority-container">
+                                                            <span className="priority-badge">
+                                                                {calculatePriority(task)}
+                                                            </span>
+                                                            <span className="project-badge" style={{marginLeft: '0.5rem',
+                                                            backgroundColor: PROJECTS[task.project || 'other'].color || PROJECTS['other'].color1}}>
+                                                                {PROJECTS[task.project || 'other'].name || PROJECTS['other'].name}                                                    
+                                                            </span>
+                                                        </div>
+                                                        <div className="task-meta justify-center">  {/* Add justify-center */}
+                                                            <span>Importance: {task.importance}</span>
+                                                            <span>Length: {task.length}</span>
+                                                            <span>Difficulty: {task.difficulty}</span>
+                                                        </div>
+                                                        <div className="task-meta justify-center">  {/* Add justify-center */}
+                                                            Added {formatDate(task.createdAt)} ({getDaysOld(task.createdAt)} days ago)
+                                                        </div>
+                                                        {task.deadline && (
+                                                            <div className="task-meta justify-center">
+                                                                Deadline: {new Date(task.deadline).toLocaleDateString()}
+                                                            </div>
+                                                        )}
                                                     </div>
-                                                    <div className="task-meta">
-                                                        Completed: {formatDate(task.completedAt)}
-                                                    </div>
-                                                    <div className="priority-container">
-                                                        <span 
-                                                            className="project-badge" 
-                                                            style={{
-                                                            marginLeft: '0.5rem',
-                                                            backgroundColor: (PROJECTS[task.project || 'other'] && PROJECTS[task.project || 'other'].color) || PROJECTS['other'].color
-                                                            }}
+                                                    <div className="action-buttons">
+                                                        <button
+                                                            onClick={() => completeTask(task)}
+                                                            className="action-btn complete"
+                                                            title="Complete task"
                                                         >
-                                                            {(PROJECTS[task.project || 'other'] && PROJECTS[task.project || 'other'].name) || PROJECTS['other'].name}
-                                                        </span>
+                                                            <span style={{ marginTop: '-2px' }}>✔</span>
+                                                        </button>
+                                                        <button
+                                                            onClick={() => startEditing(task)}
+                                                            className="action-btn edit"
+                                                            title="Edit task"
+                                                        >
+                                                            <span style={{ marginTop: '-2px' }}>✎</span>
+                                                        </button>
+                                                        <button
+                                                            onClick={() => removeTask(task.id)}
+                                                            className="action-btn delete"
+                                                            title="Delete task"
+                                                        >
+                                                            <span style={{ marginTop: '-2px' }}>✖</span>
+                                                        </button>
                                                     </div>
-                                                    <div className="task-meta">
-                                                        Importance: {task.importance} | Length: {task.length} | Difficulty: {task.difficulty}
-                                                    </div>
-                                                </div>
-                                                <div className="action-buttons">
-                                                    <button
-                                                        onClick={() => revertTask(task)}
-                                                        className="action-btn revert"
-                                                        title="Revert to todo"
-                                                    >
-                                                        <span style={{ marginTop: '-2px' }}>↩</span>
-                                                    </button>
-                                                    <button
-                                                        onClick={() => removeCompletedTask(task.id)}
-                                                        className="action-btn delete"
-                                                        title="Delete completed task"
-                                                    >
-                                                        <span style={{ marginTop: '-2px' }}>✖</span>
-                                                    </button>
                                                 </div>
                                             </div>
-                                        </div>
                                         ))}
                                     </div>
+
+                                    <div className="section-divider"></div>
+
+                                    {/* Completed Tasks */}
+                                    <div>
+                                        <button
+                                            onClick={() => setShowCompleted(!showCompleted)}
+                                            className="btn w-full flex justify-between items-center"
+                                        >
+                                            <span>Completed Tasks ({filteredCompletedTasks.length})</span>
+                                            <span>{showCompleted ? ' ▼ ' : ' ▶ '}</span>
+                                        </button>
+
+                                        <div className={`completed-section ${showCompleted ? 'open' : ''}`}>
+                                            <div className="completed-task-grid">
+                                                {filteredCompletedTasks.map(task => (
+                                                <div
+                                                    key={task.id}
+                                                    className="task-item completed-task"
+                                                >
+                                                    <div className="flex justify-between items-start">
+                                                        <div>
+                                                            <div className="task-name">{task.name}</div>
+                                                            <div className="task-meta">
+                                                                Started: {formatDate(task.createdAt)}
+                                                            </div>
+                                                            <div className="task-meta">
+                                                                Completed: {formatDate(task.completedAt)}
+                                                            </div>
+                                                            <div className="priority-container">
+                                                                <span 
+                                                                    className="project-badge" 
+                                                                    style={{
+                                                                    marginLeft: '0.5rem',
+                                                                    backgroundColor: (PROJECTS[task.project || 'other'] && PROJECTS[task.project || 'other'].color) || PROJECTS['other'].color
+                                                                    }}
+                                                                >
+                                                                    {(PROJECTS[task.project || 'other'] && PROJECTS[task.project || 'other'].name) || PROJECTS['other'].name}
+                                                                </span>
+                                                            </div>
+                                                            <div className="task-meta">
+                                                                Importance: {task.importance} | Length: {task.length} | Difficulty: {task.difficulty}
+                                                            </div>
+                                                        </div>
+                                                        <div className="action-buttons">
+                                                            <button
+                                                                onClick={() => revertTask(task)}
+                                                                className="action-btn revert"
+                                                                title="Revert to todo"
+                                                            >
+                                                                <span style={{ marginTop: '-2px' }}>↩</span>
+                                                            </button>
+                                                            <button
+                                                                onClick={() => removeCompletedTask(task.id)}
+                                                                className="action-btn delete"
+                                                                title="Delete completed task"
+                                                            >
+                                                                <span style={{ marginTop: '-2px' }}>✖</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        </div>
-                        <div className="notes-section">
-                        <div style={{ padding: '1rem' }}>
-                            {/* Notes textarea with improved styling */}
-                            <div className="notes-container">
-                                <textarea
-                                    value={projectNotes[currentFilter === 'all' ? 'general' : currentFilter] || ''}
-                                    onChange={(e) => {
-                                        const updatedNotes = {...projectNotes};
-                                        updatedNotes[currentFilter === 'all' ? 'general' : currentFilter] = e.target.value;
-                                        setProjectNotes(updatedNotes);
-                                    }}
-                                    className="notes-textarea"
-                                    placeholder="Add notes here..."
-                                />
+                            <div className="notes-section">
+                                <div style={{ padding: '1rem' }}>
+                                    {/* Notes textarea with improved styling */}
+                                    <div className="notes-container">
+                                        <textarea
+                                            value={projectNotes[currentFilter === 'all' ? 'general' : currentFilter] || ''}
+                                            onChange={(e) => {
+                                                const updatedNotes = {...projectNotes};
+                                                updatedNotes[currentFilter === 'all' ? 'general' : currentFilter] = e.target.value;
+                                                setProjectNotes(updatedNotes);
+                                            }}
+                                            className="notes-textarea"
+                                            placeholder="Add notes here..."
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        </div>
                         </div>
                         {editingTask && (
                         <div className="edit-overlay" onClick={() => setEditingTask(null)}>
                             <div className="edit-modal" onClick={e => e.stopPropagation()}>
-                                <h3 className="task-name">Edit Task: {editingTask.name}</h3>
-                                
+                                <h2 className="task-name">{editingTask.id === 'new' ? "Add Task" : "Edit Task" }</h2>
                                 <input
                                     type="text"
                                     value={editingTask.name}
